@@ -1,19 +1,19 @@
-import { Suspense, lazy, useEffect, useCallback } from 'react'
+import { useEffect, useCallback } from 'react'
 import { Canvas } from '@react-three/fiber'
 import useStore from './store/useStore'
 import { getQualitySettings, detectMobile } from './utils/deviceDetect'
 
-const SpaceEnvironment = lazy(() => import('./components/3d/SpaceEnvironment'))
-const ParticleField = lazy(() => import('./components/3d/ParticleField'))
-const LightBeams = lazy(() => import('./components/3d/LightBeams'))
-const CameraRig = lazy(() => import('./components/3d/CameraRig'))
-const CentralOrb = lazy(() => import('./components/3d/CentralOrb'))
-const ProjectNodes = lazy(() => import('./components/3d/ProjectNodes'))
-const NeuralNetwork = lazy(() => import('./components/3d/NeuralNetwork'))
-const SkillTerminal = lazy(() => import('./components/3d/SkillTerminal'))
-const CircuitTimeline = lazy(() => import('./components/3d/CircuitTimeline'))
-const PostProcessing = lazy(() => import('./components/effects/PostProcessing'))
-const PerformanceMonitor = lazy(() => import('./components/effects/PerformanceMonitor'))
+import SpaceEnvironment from './components/3d/SpaceEnvironment'
+import ParticleField from './components/3d/ParticleField'
+import LightBeams from './components/3d/LightBeams'
+import CameraRig from './components/3d/CameraRig'
+import CentralOrb from './components/3d/CentralOrb'
+import ProjectNodes from './components/3d/ProjectNodes'
+import NeuralNetwork from './components/3d/NeuralNetwork'
+import SkillTerminal from './components/3d/SkillTerminal'
+import CircuitTimeline from './components/3d/CircuitTimeline'
+import PostProcessing from './components/effects/PostProcessing'
+import PerformanceMonitor from './components/effects/PerformanceMonitor'
 
 import LoadingScreen from './components/ui/LoadingScreen'
 import AudioToggle from './components/ui/AudioToggle'
@@ -75,35 +75,21 @@ export default function App() {
       <Canvas
         dpr={settings.dpr}
         camera={{ position: [12, 2, 0], fov: 60, near: 0.1, far: 200 }}
-        gl={{
-          antialias: false,
-          alpha: false,
-          powerPreference: 'high-performance',
-          stencil: false,
-          depth: true,
-        }}
         style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh' }}
-        performance={{ min: 0.5 }}
       >
-        <Suspense fallback={null}>
-          <SpaceEnvironment />
-          <ParticleField />
-          <CentralOrb />
-        </Suspense>
+        <SpaceEnvironment />
+        <ParticleField />
+        <CentralOrb />
 
-        <Suspense fallback={null}>
-          <ProjectNodes />
-          <NeuralNetwork />
-          <SkillTerminal />
-          <CircuitTimeline />
-        </Suspense>
+        <ProjectNodes />
+        <NeuralNetwork />
+        <SkillTerminal />
+        <CircuitTimeline />
 
-        <Suspense fallback={null}>
-          <LightBeams />
-          <CameraRig />
-          <PostProcessing />
-          <PerformanceMonitor />
-        </Suspense>
+        <LightBeams />
+        <CameraRig />
+        <PostProcessing />
+        <PerformanceMonitor />
 
         <SceneReady />
       </Canvas>

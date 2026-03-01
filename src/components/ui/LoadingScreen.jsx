@@ -33,9 +33,9 @@ export default function LoadingScreen() {
         clearInterval(interval)
         setTimeout(() => {
           setCurrentLine((prev) => prev + 1)
-        }, 200)
+        }, 50)
       }
-    }, 30)
+    }, 5)
 
     return () => clearInterval(interval)
   }, [currentLine])
